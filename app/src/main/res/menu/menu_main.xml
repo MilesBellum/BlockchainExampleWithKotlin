@@ -1,0 +1,35 @@
+<menu
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        tools:context="com.eagb.blockchainexamplewithkotlin.activities.MainActivity">
+    <item
+            android:id="@+id/action_pow"
+            android:orderInCategory="1"
+            android:title="@string/action_set_pow"
+            app:showAsAction="never" />
+    <item
+            android:id="@+id/action_encrypt"
+            android:orderInCategory="2"
+            android:title="@string/action_encrypt_data"
+            android:checkable="true"
+            android:actionLayout="@layout/switch_layout"
+            app:showAsAction="never" />
+    <item
+            android:id="@+id/action_dark"
+            android:orderInCategory="3"
+            android:title="@string/action_dark_theme"
+            android:checkable="true"
+            android:actionLayout="@layout/switch_layout"
+            app:showAsAction="never" />
+    <item
+            android:id="@+id/action_more"
+            android:orderInCategory="4"
+            android:title="@string/action_more"
+            app:showAsAction="never" />
+    <item
+            android:id="@+id/action_exit"
+            android:orderInCategory="5"
+            android:title="@string/action_exit"
+            app:showAsAction="never" />
+</menu>

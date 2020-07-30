@@ -1,0 +1,59 @@
+<resources>
+    <string name="app_name">BlockChain with Kotlin</string>
+
+    <string name="log_block_chain_valid">Blockchain valid? %1$b</string>
+
+    <string name="action_set_pow">Set Proof-of-Work</string>
+    <string name="action_encrypt_data">Encrypt message</string>
+    <string name="action_dark_theme">Dark theme</string>
+    <string name="action_more">More info</string>
+    <string name="action_exit">Exit</string>
+
+    <string name="title_block_number" formatted="false">Block #%d</string>
+    <string name="title_block_previous_hash">Previous hash:</string>
+    <string name="title_block_timestamp">Timestamp:</string>
+    <string name="title_block_data">Data/Message:</string>
+    <string name="title_block_hash">Hash:</string>
+    <string name="title_pow">Proof-of-Work</string>
+    <string name="title_more">More info</string>
+
+    <string name="text_creating_block_chain">Please wait. Creating Blockchain…</string>
+    <string name="text_mining_blocks">Please wait. Mining blocks to insert data…</string>
+    <string name="text_write_your_message">Write your message</string>
+    <string name="text_encryption_activated">Encryption activated</string>
+    <string name="text_encryption_deactivated">Encryption deactivated</string>
+    <string name="text_set_pow">Set Proof-of-Work</string>
+    <string name="text_pow_warning"><b>Watch out!</b>\n\nThis option is only for testing. If you change this value to higher,
+        the app could take longer time mining the hashes, your device will use more CPU and it could be frozen.
+        If this happens, close the app and try to clear the storage data to restore the values.\n\n
+        <b>Note:</b> The app will be restarted to apply the change.</string>
+    <string name="text_continue">I understood. Continue and restart</string>
+    <string name="text_developed_by">Developed by Edgar Garcia</string>
+    <string name="text_app_version">v.1.0.0 - Build 01</string>
+    <string name="text_more_info">This app is an example to learn how Blockchain works as an Android app using Kotlin.
+        To know more about Blockchain you can visit:</string>
+    <string name="text_check_block_chain">Blockchain tutorial</string>
+    <string name="text_check_white_paper">Bitcoin White Paper</string>
+    <string name="text_or_read">Or read:</string>
+    <string name="text_check_book_1">Blockchain Revolution</string>
+    <string name="text_check_book_2">The Science of the Blockchain</string>
+    <string name="text_source_code">You can find the source code of this app at:</string>
+    <string name="text_check_repo">GitHub</string>
+    <string name="text_check_post">Medium post</string>
+    <string name="text_bout_me">More about me:</string>
+    <string name="text_check_web">Visit my web site</string>
+    <string name="text_love">&lt;3</string>
+    <string name="text_thank_you">Thanks a lot!</string>
+
+    <string name="error_block_chain_corrupted">Blockchain corrupted. Invalid block inserted</string>
+    <string name="error_something_wrong">Something is wrong</string>
+    <string name="error_empty_data">You are trying to send empty data</string>
+
+    <string name="cd_send_data">Send data</string>
+    <string name="cd_arrow_back">Dismiss</string>
+    <string name="cd_logo">BlockChain Example logo</string>
+
+    <string name="shortcut_restore_pow_short_label">Restore</string>
+    <string name="shortcut_restore_pow_long_label">Restore and open</string>
+    <string name="shortcut_disable">Shortcuts isn\'t available</string>
+</resources>

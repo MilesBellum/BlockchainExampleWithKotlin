@@ -1,0 +1,22 @@
+<resources>
+    <dimen name="content_margin">16dp</dimen>
+    <dimen name="vertical_content_margin">24dp</dimen>
+    <dimen name="vertical_subtitle_margin">8dp</dimen>
+    <dimen name="horizontal_content_margin">16dp</dimen>
+    <dimen name="vertical_title_margin">8dp</dimen>
+
+    <dimen name="item_rows_margin">8dp</dimen>
+    <dimen name="item_text_margin">4dp</dimen>
+
+    <dimen name="card_elevation">4dp</dimen>
+    <dimen name="card_corner_radius">8dp</dimen>
+
+    <dimen name="edit_text_margin">16dp</dimen>
+    <dimen name="edit_text_padding">8dp</dimen>
+
+    <dimen name="button_margin">8dp</dimen>
+
+    <dimen name="edit_text_size">16sp</dimen>
+    <dimen name="title_text_size">18sp</dimen>
+    <dimen name="text_size">14sp</dimen>
+</resources>

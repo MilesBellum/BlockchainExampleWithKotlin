@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="text_pow_warning"><b>Watch out!</b>\n\nThis option is only for testing. If you change this value to higher,
+        the app could take longer time mining the hashes, your device will use more CPU and it could be frozen.
+        If this happens, close the app and try to clear the storage data to restore the values or press the \'Restore and open\' shortcut.
+        Pressing and holding  the app icon.\n\n
+        <b>Note:</b> The app will be restarted to apply the change.</string>
+</resources>
