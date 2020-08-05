@@ -105,7 +105,7 @@ class MoreInfoFragment : DialogFragment() {
 
             R.id.ll_check_repo -> {
                 // Checking the official repo to fork
-                url = "https://github.com/MilesBellum/BlockchainExample"
+                url = "https://github.com/MilesBellum/BlockchainExampleWithKotlin"
                 openUrl(url)
             }
 
