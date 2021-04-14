@@ -57,6 +57,7 @@ captures/
 # IntelliJ - User-specific configurations
 *.iml
 *.iws
+.idea/sonarlint/
 .idea/caches/
 .idea/libraries/
 .idea/shelf/

@@ -18,6 +18,9 @@ class BlockModel(
     }
 
     companion object {
+
+        // This is the process to find a hash with the exact
+        // number of leading zeros set by the user
         fun calculateHash(block: BlockModel?): String? {
             block?.let {
                 val messageDigest: MessageDigest = try {
@@ -59,7 +62,11 @@ class BlockModel(
 
     private fun str(): String? { return index.toString() + timestamp + previousHash + data + nonce }
 
-    // Proof-of-Work (mining blocks)
+    // Proof-of-Work (mining blocks).
+    // Adding the number of zeros set by the user.
+    // The more zeros at the beginning of the hash, the more difficult
+    // it will be to find a hash with that request.
+    // The calculations will be done by the CPU. This process is called 'mining'
     fun mineBlock(difficulty: Int) {
         nonce = 0
 
@@ -69,6 +76,7 @@ class BlockModel(
         }
     }
 
+    // Adding zeros in a String to set more difficulty
     private fun addZeros(length: Int): String {
         val builder = StringBuilder()
 

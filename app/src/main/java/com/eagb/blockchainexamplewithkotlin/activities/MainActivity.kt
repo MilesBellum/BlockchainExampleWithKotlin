@@ -32,7 +32,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var prefs: SharedPreferencesManager
     private lateinit var appUpdateManager: AppUpdateManager
 
-    //private var progressDialog: ProgressDialog? = null
     private var progressDialog: ProgressDialog? = null
     private var blockChain: BlockChainManager? = null
     private var isEncryptionActivated = false
