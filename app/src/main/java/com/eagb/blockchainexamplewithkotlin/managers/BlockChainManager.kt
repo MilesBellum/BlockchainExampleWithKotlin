@@ -8,7 +8,6 @@ class BlockChainManager(
     context: Context,
     private val difficulty: Int
 ) {
-
     private var blocks: MutableList<BlockModel> = ArrayList()
     var adapter: BlockAdapter
 
@@ -28,11 +27,11 @@ class BlockChainManager(
     }
 
     // Broadcast block
-    fun newBlock(data: String?): BlockModel? {
+    fun newBlock(data: String?): BlockModel {
         val latestBlock = latestBlock()
 
         return BlockModel(
-            latestBlock.getIndex() + 1, System.currentTimeMillis(),
+            latestBlock.index + 1, System.currentTimeMillis(),
             latestBlock.getHash(), data
         )
     }
@@ -49,11 +48,11 @@ class BlockChainManager(
     private fun isFirstBlockValid(): Boolean {
         val firstBlock = blocks[0]
 
-        if (firstBlock.getIndex() != 0) {
+        if (firstBlock.index != 0) {
             return false
         }
 
-        return if (firstBlock.getPreviousHash() != null) {
+        return if (firstBlock.previousHash != null) {
             false
         } else firstBlock.getHash() != null &&
                 BlockModel.calculateHash(firstBlock).equals(firstBlock.getHash())
@@ -65,12 +64,12 @@ class BlockChainManager(
         previousBlock: BlockModel?
     ): Boolean {
         if (newBlock != null && previousBlock != null) {
-            if (previousBlock.getIndex() + 1 != newBlock.getIndex()) {
+            if (previousBlock.index + 1 != newBlock.index) {
                 return false
             }
 
-            return if (newBlock.getPreviousHash() == null ||
-                !newBlock.getPreviousHash().equals(previousBlock.getHash())
+            return if (newBlock.previousHash == null ||
+                newBlock.previousHash != previousBlock.getHash()
             ) {
                 return false
             } else newBlock.getHash() != null &&

@@ -6,4 +6,8 @@
     <color name="textHintColor">#838383</color>
     <color name="textColor">#585858</color>
     <color name="textCautionColor">#7E2F2F</color>
+
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="gray">#1B1B1B</color>
 </resources>

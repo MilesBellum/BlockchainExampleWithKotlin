@@ -13,7 +13,8 @@ import com.eagb.blockchainexamplewithkotlin.managers.SharedPreferencesManager
 
 class PowFragment : DialogFragment() {
 
-    private lateinit var viewBinding: FragmentPowBinding
+    private var _binding: FragmentPowBinding? = null
+    private val binding get() = _binding!!
     private lateinit var prefs: SharedPreferencesManager
 
     companion object {
@@ -25,33 +26,33 @@ class PowFragment : DialogFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
-        viewBinding = FragmentPowBinding.inflate(
-            layoutInflater,
-            container,
-            false
-        )
+        _binding = FragmentPowBinding.inflate(layoutInflater, container, false)
 
-        return viewBinding.root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         prefs = SharedPreferencesManager(requireContext())
-        viewBinding.edtSetPow.setText(prefs.getPowValue().toString())
-        viewBinding.btnClose.setOnClickListener(clickListener)
-        viewBinding.btnContinue.setOnClickListener(clickListener)
+        binding.edtSetPow.setText(prefs.getPowValue().toString())
+        binding.btnClose.setOnClickListener(clickListener)
+        binding.btnContinue.setOnClickListener(clickListener)
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog = super.onCreateDialog(savedInstanceState)
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-
-        dialog.window?.setLayout(
-            ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT
-        )
+        dialog.apply {
+            requestWindowFeature(Window.FEATURE_NO_TITLE)
+            window?.let {
+                it.setLayout(
+                    ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT
+                )
+                it.setBackgroundDrawableResource(android.R.color.transparent)
+            }
+        }
 
         return dialog
     }
@@ -59,13 +60,14 @@ class PowFragment : DialogFragment() {
     private val clickListener = View.OnClickListener { view ->
         when (view?.id) {
             R.id.btn_close -> dismiss()
+
             R.id.btn_continue -> setNewPow()
         }
     }
 
     private fun setNewPow() {
-        viewBinding.edtSetPow.text?.let {
-            val pow = viewBinding.edtSetPow.text.toString()
+        binding.edtSetPow.text?.let {
+            val pow = binding.edtSetPow.text.toString()
             prefs.setPowValue(pow.toInt())
 
             if (activity != null) {

@@ -1,34 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.ContentFrameLayout
+<com.google.android.material.card.MaterialCardView
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:context=".fragments.PowFragment"
-        android:theme="@style/Theme.MaterialComponents.DayNight.DarkActionBar"
-        android:layout_gravity="center">
+        android:layout_margin="@dimen/vertical_content_margin"
+        android:layout_gravity="center"
+        app:cardCornerRadius="24dp"
+        app:cardPreventCornerOverlap="false"
+        tools:context=".fragments.PowFragment">
 
-    <LinearLayout
-            android:layout_width="330dp"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
         <ImageButton
+                android:id="@+id/btn_close"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/btn_close"
                 app:srcCompat="@drawable/ic_close_24dp"
                 android:layout_gravity="top|start"
                 android:contentDescription="@string/cd_arrow_back"
                 android:layout_margin="@dimen/content_margin"
-                android:background="@android:color/transparent" />
+                android:background="@android:color/transparent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
         <ScrollView
+                android:id="@+id/scroll_container"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:fillViewport="true">
+                android:fillViewport="true"
+                app:layout_constraintTop_toBottomOf="@+id/btn_close"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
 
             <LinearLayout
                     android:layout_width="match_parent"
@@ -45,12 +53,12 @@
                         android:orientation="vertical">
 
                     <TextView
+                            android:id="@+id/txt_title"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:id="@+id/txt_title"
                             android:text="@string/title_pow"
                             android:textStyle="bold"
-                            android:textColor="@color/textColor"
+                            android:textColor="@color/text_color"
                             android:textAlignment="center"
                             android:layout_marginBottom="@dimen/vertical_content_margin"
                             android:textAppearance="@style/TextAppearance.AppCompat.Title" />
@@ -72,8 +80,8 @@
                                 android:maxLength="2"
                                 android:maxLines="1"
                                 android:padding="@dimen/edit_text_padding"
-                                android:textColorHint="@color/textHintColor"
-                                android:textColor="@color/textColor"
+                                android:textColorHint="@color/text_hint_color"
+                                android:textColor="@color/text_color"
                                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                                 tools:text="2"
                                 android:textAlignment="textStart"
@@ -85,7 +93,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textStyle="normal"
-                            android:textColor="@color/textColor"
+                            android:textColor="@color/text_color"
                             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                             android:textAlignment="center"
                             android:text="@string/text_pow_warning"
@@ -101,7 +109,7 @@
                         android:textAppearance="@style/Widget.MaterialComponents.Button.TextButton"
                         android:textStyle="bold"
                         android:textSize="@dimen/edit_text_size"
-                        android:textColor="@color/textCautionColor"
+                        android:textColor="@color/text_caution_color"
                         app:cornerRadius="@dimen/card_corner_radius"
                         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                         android:layout_margin="@dimen/button_margin"
@@ -111,6 +119,6 @@
 
         </ScrollView>
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-</androidx.appcompat.widget.ContentFrameLayout>
+</com.google.android.material.card.MaterialCardView>

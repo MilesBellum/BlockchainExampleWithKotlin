@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--color name="overlay_color_primary">#6779F5</color>
+    <color name="overlay_color_on_primary">@color/white</color>
+    <color name="overlay_color_primary_container">@color/overlay_translucent_color_background</color>
+    <color name="overlay_color_on_primary_container">#9FA8DA</color>
+
+    <color name="overlay_color_secondary">#5241B7</color>
+    <color name="overlay_color_on_secondary">@color/white</color>
+    <color name="overlay_color_secondary_container">@color/white</color>
+    <color name="overlay_color_on_secondary_container">@color/white</color>
+
+    <color name="overlay_color_tertiary">#6779F5</color>
+    <color name="overlay_color_on_tertiary">@color/white</color>
+    <color name="overlay_color_tertiary_container">@color/white</color>
+    <color name="overlay_color_on_tertiary_container">@color/white</color>
+
+    <color name="overlay_color_surface">@color/white</color>
+    <color name="overlay_color_on_surface_variant">#6779F5</color>
+    <color name="overlay_color_error">@color/text_caution_color</color>
+    <color name="overlay_color_on_error">@color/text_caution_color</color>
+
+    <color name="overlay_color_background">@color/gray</color>
+    <color name="overlay_translucent_color_background">#FB36363E</color>
+    <color name="overlay_color_on_background">@color/white</color>
+    <color name="overlay_color_accent">#6779F5</color>
+    <color name="overlay_color_primary_dark">#5241B7</color>
+
+    <color name="text_hint_color">#C1C1C1</color>
+    <color name="text_color">@color/white</color>
+    <color name="text_caution_color">#DD4E4E</color>
+    <color name="overlay_scrim">@android:color/holo_blue_light</color>
+
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="gray">#2E2E2E</color-->
+</resources>
