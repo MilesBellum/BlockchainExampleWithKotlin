@@ -16,8 +16,8 @@
             tools:ignore="AllowBackup,GoogleAppIndexingWarning">
         <activity
                 android:name=".activities.MainActivity"
-                android:label="@string/app_name"
                 android:screenOrientation="portrait"
+                android:exported="true"
                 android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
                 tools:ignore="LockedOrientationActivity">
             <intent-filter>
