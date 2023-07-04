@@ -6,10 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import androidx.recyclerview.widget.RecyclerView
-import com.eagb.blockchainexamplewithkotlin.R
+import com.eagb.blockchainexamplewithkotlin.databinding.ItemBlockDataBinding
 import com.eagb.blockchainexamplewithkotlin.holders.RecyclerViewHolder
 import com.eagb.blockchainexamplewithkotlin.models.BlockModel
-import java.util.*
 
 class BlockAdapter(
     private val  context: Context,
@@ -21,12 +20,7 @@ class BlockAdapter(
     // Create new views (invoked by the layout manager)
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerViewHolder {
         // Inflate the layout, initialize the View Holder
-        val view = LayoutInflater.from(parent.context).inflate(
-            viewType,
-            parent,
-            false
-        )
-
+        val view = ItemBlockDataBinding.inflate(LayoutInflater.from(parent.context))
         return RecyclerViewHolder(view)
     }
 
@@ -34,16 +28,7 @@ class BlockAdapter(
         // Use the provided View Holder on the onCreateViewHolder method
         // to populate the current row on the RecyclerView
         blocks?.let {
-            viewHolder.txtIndex.text = String.format(
-                context.getString(R.string.title_block_number), it[position]?.getIndex()
-            )
-            viewHolder.txtPreviousHash.text =
-                if (it[position]?.getPreviousHash() != null) it[position]?.getPreviousHash() else "Null"
-            viewHolder.txtTimestamp.text = Date(
-                it[position]!!.getTimestamp()
-            ).toString()
-            viewHolder.txtData.text = it[position]?.getData()
-            viewHolder.txtHash.text = it[position]?.getHash()
+            viewHolder.collectData(context, it[position]!!)
         }
 
         setAnimation(viewHolder.itemView, position)
@@ -59,11 +44,6 @@ class BlockAdapter(
     }
 
     // Return the size of list of data (invoked by the layout manager)
-    override fun getItemCount(): Int {
-        return blocks?.size ?: 0
-    }
+    override fun getItemCount(): Int = blocks?.size ?: 0
 
-    override fun getItemViewType(position: Int): Int {
-        return R.layout.item_block_data
-    }
 }

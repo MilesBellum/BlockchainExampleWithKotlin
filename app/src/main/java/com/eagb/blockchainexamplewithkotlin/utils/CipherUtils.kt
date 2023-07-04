@@ -50,7 +50,7 @@ class CipherUtils {
         }
 
         // This method is not used in this app, but it's not bad to know how to decrypt the text
-        fun decryptIt(value: String): String? {
+        fun decryptIt(value: String): String {
             try {
                 val keySpec =
                     DESKeySpec(PASSWORD.toByteArray(StandardCharsets.UTF_8))

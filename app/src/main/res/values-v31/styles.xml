@@ -1,0 +1,111 @@
+<resources>
+
+    <!--style name="Theme.MaterialComponents.DayNight" parent="Theme.MaterialComponents.Light">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style-->
+
+    <!--style name="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowActionBarOverlay">false</item>
+        <item name="windowNoTitle">true</item>
+    </style-->
+
+    <!--style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" /-->
+
+
+
+    <style name="Theme.App" parent="AppTheme">
+        <!-- Original AppCompat attributes. -->
+        <!--item name="colorPrimary">@color/overlay_color_primary</item>
+        <item name="colorPrimaryDark">@color/overlay_color_primary</item>
+        <item name="colorSecondary">@color/overlay_color_secondary</item>
+        <item name="android:colorBackground">@color/overlay_color_background</item>
+        <item name="colorError">@color/overlay_color_error</item-->
+
+        <!-- MaterialComponents attributes (needed if parent="Theme.AppCompat"). -->
+        <!--item name="colorPrimaryVariant">@color/overlay_color_primary</item>
+        <item name="colorSecondaryVariant">@color/overlay_color_secondary</item>
+        <item name="colorSurface">@color/overlay_color_surface</item>
+        <item name="colorOnPrimary">@color/overlay_color_on_primary</item>
+        <item name="colorOnSecondary">@color/overlay_color_on_secondary</item>
+        <item name="colorOnBackground">@color/overlay_color_on_background</item>
+        <item name="colorOnError">@color/overlay_color_on_error</item>
+        <item name="colorOnSurface">@color/overlay_color_on_surface_variant</item>
+        <item name="scrimBackground">@color/overlay_scrim</item>
+        <item name="textAppearanceHeadline1">@style/TextAppearance.MaterialComponents.Headline1</item>
+        <item name="textAppearanceHeadline2">@style/TextAppearance.MaterialComponents.Headline2</item>
+        <item name="textAppearanceHeadline3">@style/TextAppearance.MaterialComponents.Headline3</item>
+        <item name="textAppearanceHeadline4">@style/TextAppearance.MaterialComponents.Headline4</item>
+        <item name="textAppearanceHeadline5">@style/TextAppearance.MaterialComponents.Headline5</item>
+        <item name="textAppearanceHeadline6">@style/TextAppearance.MaterialComponents.Headline6</item>
+        <item name="textAppearanceSubtitle1">@style/TextAppearance.MaterialComponents.Subtitle1</item>
+        <item name="textAppearanceSubtitle2">@style/TextAppearance.MaterialComponents.Subtitle2</item>
+        <item name="textAppearanceBody1">@style/TextAppearance.MaterialComponents.Body1</item>
+        <item name="textAppearanceBody2">@style/TextAppearance.MaterialComponents.Body2</item>
+        <item name="textAppearanceCaption">@style/TextAppearance.MaterialComponents.Caption</item>
+        <item name="textAppearanceButton">@style/TextAppearance.MaterialComponents.Button</item>
+        <item name="textAppearanceOverline">@style/TextAppearance.MaterialComponents.Overline</item-->
+
+        <!-- Material3 attributes (needed if parent="Theme.MaterialComponents"). -->
+        <!--item name="colorPrimaryInverse">@color/overlay_color_primary</item>
+        <item name="colorPrimaryContainer">@color/overlay_color_primary_container</item>
+        <item name="colorOnPrimaryContainer">@color/overlay_color_on_primary_container</item>
+        <item name="colorSecondaryContainer">@color/overlay_color_secondary_container</item>
+        <item name="colorOnSecondaryContainer">@color/overlay_color_on_secondary_container</item>
+        <item name="colorTertiary">@color/overlay_color_tertiary</item>
+        <item name="colorOnTertiary">@color/overlay_color_on_tertiary</item>
+        <item name="colorTertiaryContainer">@color/overlay_color_tertiary_container</item>
+        <item name="colorOnTertiaryContainer">@color/overlay_color_on_tertiary_container</item>
+        <item name="colorSurfaceVariant">@color/overlay_color_surface</item>
+        <item name="colorOnSurfaceVariant">@color/overlay_color_on_surface_variant</item>
+        <item name="colorSurfaceInverse">@color/overlay_color_surface</item>
+        <item name="colorOnSurfaceInverse">@color/overlay_color_surface</item>
+        <item name="colorOutline">@color/overlay_color_accent</item>
+        <item name="colorErrorContainer">@color/overlay_color_error</item>
+        <item name="colorOnErrorContainer">@color/overlay_color_on_error</item>
+        <item name="textAppearanceDisplayLarge">@style/TextAppearance.Material3.DisplayLarge</item>
+        <item name="textAppearanceDisplayMedium">@style/TextAppearance.Material3.DisplayMedium</item>
+        <item name="textAppearanceDisplaySmall">@style/TextAppearance.Material3.DisplaySmall</item>
+        <item name="textAppearanceHeadlineLarge">@style/TextAppearance.Material3.HeadlineLarge</item>
+        <item name="textAppearanceHeadlineMedium">@style/TextAppearance.Material3.HeadlineMedium</item>
+        <item name="textAppearanceHeadlineSmall">@style/TextAppearance.Material3.HeadlineSmall</item>
+        <item name="textAppearanceTitleLarge">@style/TextAppearance.Material3.TitleLarge</item>
+        <item name="textAppearanceTitleMedium">@style/TextAppearance.Material3.TitleMedium</item>
+        <item name="textAppearanceTitleSmall">@style/TextAppearance.Material3.TitleSmall</item>
+        <item name="textAppearanceBodyLarge">@style/TextAppearance.Material3.BodyLarge</item>
+        <item name="textAppearanceBodyMedium">@style/TextAppearance.Material3.BodyMedium</item>
+        <item name="textAppearanceBodySmall">@style/TextAppearance.Material3.BodySmall</item>
+        <item name="textAppearanceLabelLarge">@style/TextAppearance.Material3.LabelLarge</item>
+        <item name="textAppearanceLabelMedium">@style/TextAppearance.Material3.LabelMedium</item>
+        <item name="textAppearanceLabelSmall">@style/TextAppearance.Material3.LabelSmall</item>
+        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.Material3.SmallComponent</item>
+        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.Material3.MediumComponent</item>
+        <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.Material3.LargeComponent</item-->
+
+        <item name="materialCardViewStyle">@style/Widget.App.CardView</item>
+    </style>
+
+    <style name="ShapeAppearance.App.MediumComponent" parent="ShapeAppearance.Material3.MediumComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">8dp</item>
+    </style>
+
+    <style name="Theme.Material3.DayNight.NoActionBar" parent="Theme.Material3.Light">
+        <item name="windowActionBar">false</item>
+        <item name="windowActionBarOverlay">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Widget.App.CardView" parent="Widget.Material3.CardView.Elevated">
+        <!--item name="materialThemeOverlay">@style/ThemeOverlay.App.Card</item-->
+        <item name="shapeAppearance">@style/ShapeAppearance.App.MediumComponent</item>
+        <!--item name="cardBackgroundColor">@color/overlay_translucent_color_background</item-->
+        <item name="cardCornerRadius">0dp</item>
+        <item name="cardElevation">@dimen/card_elevation</item>
+    </style>
+
+</resources>

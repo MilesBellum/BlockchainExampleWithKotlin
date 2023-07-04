@@ -4,10 +4,11 @@ import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
 
 class BlockModel(
-    private val index: Int,
-    private val timestamp: Long,
-    private val previousHash: String?,
-    private val data: String?) {
+    val index: Int,
+    val timestamp: Long,
+    val previousHash: String?,
+    val data: String?
+    ) {
 
     private var nonce: Int
     private var hash: String? = null
@@ -30,7 +31,7 @@ class BlockModel(
                 }
 
                 val txt = it.str()
-                val bytes = messageDigest.digest(txt!!.toByteArray())
+                val bytes = messageDigest.digest(txt.toByteArray())
                 val builder = StringBuilder()
 
                 for (b in bytes) {
@@ -50,17 +51,9 @@ class BlockModel(
         }
     }
 
-    fun getIndex(): Int { return index }
-
-    fun getTimestamp(): Long { return timestamp }
-
     fun getHash(): String? { return hash }
 
-    fun getPreviousHash(): String? { return previousHash }
-
-    fun getData(): String? { return data }
-
-    private fun str(): String? { return index.toString() + timestamp + previousHash + data + nonce }
+    private fun str(): String { return index.toString() + timestamp + previousHash + data + nonce }
 
     // Proof-of-Work (mining blocks).
     // Adding the number of zeros set by the user.
@@ -70,7 +63,7 @@ class BlockModel(
     fun mineBlock(difficulty: Int) {
         nonce = 0
 
-        while (getHash()!!.substring(0, difficulty) != addZeros(difficulty)) {
+        while (hash!!.substring(0, difficulty) != addZeros(difficulty)) {
             nonce++
             hash = calculateHash(this)
         }

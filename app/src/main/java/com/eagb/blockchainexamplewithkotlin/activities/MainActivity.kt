@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.eagb.blockchainexamplewithkotlin.R
 import com.eagb.blockchainexamplewithkotlin.databinding.ActivityMainBinding
-import com.eagb.blockchainexamplewithkotlin.databinding.ContentMainBinding
+import com.eagb.blockchainexamplewithkotlin.databinding.InputContainerBinding
 import com.eagb.blockchainexamplewithkotlin.fragments.MoreInfoFragment
 import com.eagb.blockchainexamplewithkotlin.fragments.PowFragment
 import com.eagb.blockchainexamplewithkotlin.managers.BlockChainManager
@@ -26,9 +26,10 @@ import com.google.android.play.core.appupdate.AppUpdateManagerFactory
 import com.google.android.play.core.install.model.AppUpdateType
 import com.google.android.play.core.install.model.UpdateAvailability
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
-    private lateinit var viewBindingContent: ContentMainBinding
+    private lateinit var binding: ActivityMainBinding
+    private lateinit var bindingInput: InputContainerBinding
     private lateinit var prefs: SharedPreferencesManager
     private lateinit var appUpdateManager: AppUpdateManager
 
@@ -46,6 +47,14 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         prefs = SharedPreferencesManager(this)
         isDarkThemeActivated = prefs.isDarkTheme()
+
+        /*val dynamicColor = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
+        val colorScheme = if (dynamicColor) {
+            val context = LocalContext.current
+            if (darkMode) dynamicLightColorScheme(context) else dynamicDarkColorScheme(context)
+        } else {
+            // Use lightColorScheme, darkColorScheme...
+        }*/
 
         val powerManager = getSystemService(Context.POWER_SERVICE) as PowerManager
         var isPowerSaveMode: Boolean
@@ -72,51 +81,59 @@ class MainActivity : AppCompatActivity() {
 
         // Setting the Night mode - must be done before calling super()
         super.onCreate(savedInstanceState)
-        val viewBinding: ActivityMainBinding = ActivityMainBinding.inflate(layoutInflater)
-        viewBindingContent = ContentMainBinding.bind(viewBinding.contentMain.root)
+        val viewBinding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityMainBinding.bind(viewBinding.root)
+        binding.toolbar.apply {
+            setTitleTextColor(resources.getColor(android.R.color.white, context.theme))
+            setSubtitleTextColor(resources.getColor(android.R.color.white, context.theme))
+        }
+        bindingInput = InputContainerBinding.bind(binding.inputContainer.root)
         setContentView(viewBinding.root)
-        setSupportActionBar(viewBinding.toolbar)
+        //setSupportActionBar(viewBinding.toolbar)
+        setSupportActionBar(binding.toolbar)
 
         // Check a possible update from Play Store
         checkUpdate()
 
         isEncryptionActivated = prefs.getEncryptionStatus()
 
-        // Use this setting to improve performance if you know that changes
-        // in content do not change the layout size of the RecyclerView
-        viewBindingContent.recyclerContent.setHasFixedSize(true)
-        // Use a linear layout manager
-        viewBindingContent.recyclerContent.layoutManager = LinearLayoutManager(
-            this,
-            RecyclerView.VERTICAL,
-            false
-        )
-
         // Setting the Progress Dialog
         showProgressDialog(resources.getString(R.string.text_creating_block_chain))
 
-        // Starting BlockChain request on a thread
-        Thread(Runnable {
-            runOnUiThread {
-                // Initializing BlockChain...
-                // PROOF_OF_WORK = difficulty.
-                // Given some difficulty, the CPU will has to find a hash for the block
-                // starting with a given number of zeros.
-                // More Proof-of-Work will be harder to mine and will take longer time.
-                // Watch out!
-                blockChain = BlockChainManager(this, prefs.getPowValue())
-                viewBindingContent.recyclerContent.adapter = blockChain?.adapter
-                cancelProgressDialog(progressDialog)
-            }
-        }).start()
+        binding.recyclerContent.apply {
+            // Use this setting to improve performance if you know that changes
+            // in content do not change the layout size of the RecyclerView
+            setHasFixedSize(true)
 
-        viewBindingContent.btnSendData.setOnClickListener {
+            // Use a linear layout manager
+            layoutManager =
+                LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+
+            // Starting BlockChain request on a thread
+            Thread(Runnable {
+                runOnUiThread {
+                    // Initializing BlockChain...
+                    // PROOF_OF_WORK = difficulty.
+                    // Given some difficulty, the CPU will has to find a hash for the block
+                    // starting with a given number of zeros.
+                    // More Proof-of-Work will be harder to mine and will take longer time.
+                    // Watch out!
+                    blockChain = BlockChainManager(context, prefs.getPowValue())
+                    adapter = blockChain?.adapter
+                    cancelProgressDialog(progressDialog)
+                }
+            }).start()
+        }
+
+        bindingInput.btnSendData.setOnClickListener {
             // Start new request on a UI thread
             startBlockChain()
         }
     }
 
-    // Check a possible update from Play Store
+    /**
+     * Checks a possible update from Play Store.
+     */
     private fun checkUpdate() {
         // Creates instance of the manager
         appUpdateManager = AppUpdateManagerFactory.create(this)
@@ -135,7 +152,13 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    // If an update exist, request for the update
+    /**
+     * If an update exist, request for the update.
+     *
+     * @param appUpdateManager is the manager to start the flow for result
+     * [AppUpdateManager.startUpdateFlowForResult].
+     * @param appUpdateInfo gets the app info [AppUpdateInfo].
+     */
     private fun startTheUpdate(
         appUpdateManager: AppUpdateManager,
         appUpdateInfo: AppUpdateInfo
@@ -163,7 +186,9 @@ class MainActivity : AppCompatActivity() {
         resumeTheUpdate()
     }
 
-    // Continue with the update if one exists
+    /**
+     * Continue with the update if one exists.
+     */
     private fun resumeTheUpdate() {
         appUpdateManager
             .appUpdateInfo
@@ -177,15 +202,17 @@ class MainActivity : AppCompatActivity() {
             }
     }
 
-    // Starting new request on a thread
+    /**
+     * Starting new request or block on a thread.
+     */
     private fun startBlockChain() {
         // Setting the Progress Dialog
         showProgressDialog(resources.getString(R.string.text_mining_blocks))
 
         runOnUiThread {
             blockChain?.let {
-                if (viewBindingContent.editMessage.text != null && viewBindingContent.recyclerContent.adapter != null) {
-                    val message = viewBindingContent.editMessage.text.toString()
+                if (bindingInput.editMessage.text != null && binding.recyclerContent.adapter != null) {
+                    val message = bindingInput.editMessage.text.toString()
 
                     if (message.isNotEmpty()) {
 
@@ -212,7 +239,6 @@ class MainActivity : AppCompatActivity() {
                                 ).show()
                             }
                         }
-                        viewBindingContent.recyclerContent.scrollToPosition(it.adapter.itemCount - 1)
 
                         // Validate block's data
                         println(
@@ -223,9 +249,10 @@ class MainActivity : AppCompatActivity() {
                         )
                         if (it.isBlockChainValid()) {
                             // Preparing data to insert to RecyclerView
-                            viewBindingContent.recyclerContent.adapter?.notifyDataSetChanged()
+                            binding.recyclerContent.smoothScrollToPosition(it.adapter.itemCount - 1)
+                            binding.recyclerContent.adapter?.notifyDataSetChanged()
                             // Cleaning the EditText
-                            viewBindingContent.editMessage.setText("")
+                            bindingInput.editMessage.setText("")
                         } else {
                             Toast.makeText(
                                 this,
@@ -253,7 +280,11 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    // Setting the Progress Dialog
+    /**
+     * Setting the Progress Dialog.
+     *
+     * @param loadingMessage is the message in [String].
+     */
     private fun showProgressDialog(loadingMessage: String) {
         progressDialog = ProgressDialog(this@MainActivity)
         progressDialog!!.setProgressStyle(ProgressDialog.STYLE_SPINNER)

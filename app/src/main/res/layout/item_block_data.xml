@@ -3,8 +3,7 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
     <LinearLayout
             android:layout_width="match_parent"
@@ -18,7 +17,7 @@
                 android:id="@+id/txt_index"
                 android:text="@string/title_block_number"
                 android:textStyle="bold"
-                android:textColor="@color/textColor"
+                android:textColor="@color/text_color"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 android:textAlignment="textStart"
                 android:layout_marginTop="@dimen/item_rows_margin"
@@ -35,7 +34,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/title_block_previous_hash"
                     android:textStyle="bold"
-                    android:textColor="@color/textColor"
+                    android:textColor="@color/text_color"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textAlignment="textStart"
                     android:layout_marginEnd="@dimen/item_text_margin" />
@@ -45,7 +44,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/txt_previous_hash"
                     tools:text="Previous hash"
-                    android:textColor="@color/textColor"
+                    android:textColor="@color/text_color"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textAlignment="textStart" />
 
@@ -62,7 +61,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/title_block_timestamp"
                     android:textStyle="bold"
-                    android:textColor="@color/textColor"
+                    android:textColor="@color/text_color"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textAlignment="textStart"
                     android:layout_marginEnd="@dimen/item_text_margin" />
@@ -72,7 +71,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/txt_timestamp"
                     tools:text="Timestamp"
-                    android:textColor="@color/textColor"
+                    android:textColor="@color/text_color"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textAlignment="textStart"  />
 
@@ -89,7 +88,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/title_block_data"
                     android:textStyle="bold"
-                    android:textColor="@color/textColor"
+                    android:textColor="@color/text_color"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textAlignment="textStart"
                     android:layout_marginEnd="@dimen/item_text_margin" />
@@ -99,7 +98,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/txt_data"
                     tools:text="Data"
-                    android:textColor="@color/textColor"
+                    android:textColor="@color/text_color"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textAlignment="textStart" />
 
@@ -117,7 +116,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/title_block_hash"
                     android:textStyle="bold"
-                    android:textColor="@color/textColor"
+                    android:textColor="@color/text_color"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textAlignment="textStart"
                     android:layout_marginEnd="@dimen/item_text_margin" />
@@ -127,7 +126,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/txt_hash"
                     tools:text="Hash"
-                    android:textColor="@color/textColor"
+                    android:textColor="@color/text_color"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textAlignment="textStart" />
 
@@ -138,7 +137,7 @@
     <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/colorPrimary"
+            android:background="@color/md_theme_light_primary"
             android:layout_gravity="bottom" />
 
 </FrameLayout>

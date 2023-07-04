@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">BlockChain with Kotlin</string>
+    <string name="title_toolbar">BlockChain</string>
+    <string name="subtitle_toolbar">with Kotlin</string>
 
     <string name="log_block_chain_valid">Blockchain valid? %1$b</string>
 
@@ -50,6 +52,7 @@
     <string name="error_empty_data">You are trying to send empty data</string>
 
     <string name="cd_send_data">Send data</string>
+    <string name="cd_attach_file">Attach file</string>
     <string name="cd_arrow_back">Dismiss</string>
     <string name="cd_logo">BlockChain Example logo</string>
 
