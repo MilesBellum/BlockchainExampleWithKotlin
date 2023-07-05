@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- TODO: Update to com.google.android.material.card.MaterialCardView -->
+<androidx.cardview.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/cv_input_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cardBackgroundColor="@color/color_primary_container">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/edit_text_margin"
+            android:orientation="horizontal"
+            android:background="@android:color/transparent">
+
+        <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edit_message"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:hint="@string/text_write_your_message"
+                android:maxLines="5"
+                android:textAlignment="textStart"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@color/color_on_primary_container"
+                android:textColorHint="@color/text_hint_color"
+                android:textStyle="normal"
+                tools:ignore="TouchTargetSizeCheck" />
+
+        <ImageButton
+                android:id="@+id/btn_attach_file"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="@dimen/icon_margin"
+                android:background="@android:color/transparent"
+                android:contentDescription="@string/cd_attach_file"
+                app:srcCompat="@drawable/ic_round_attach_file_24"
+                tools:ignore="TouchTargetSizeCheck" />
+
+        <ImageButton
+                android:id="@+id/btn_send_data"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="@dimen/icon_margin"
+                android:background="@android:color/transparent"
+                android:contentDescription="@string/cd_send_data"
+                app:srcCompat="@drawable/ic_round_send_24"
+                tools:ignore="TouchTargetSizeCheck" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</androidx.cardview.widget.CardView>

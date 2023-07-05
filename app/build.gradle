@@ -8,7 +8,6 @@ android {
     def ext = rootProject.extensions.ext
 
     compileSdkVersion ext.compileSdkVersion
-    buildToolsVersion ext.buildToolsVersion
 
     defaultConfig {
         applicationId ext.nameSpace
@@ -29,6 +28,8 @@ android {
     buildFeatures {
         viewBinding = true
     }
+
+    namespace 'com.eagb.blockchainexamplewithkotlin'
 }
 
 dependencies {
