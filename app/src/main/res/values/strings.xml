@@ -1,7 +1,9 @@
 <resources>
     <string name="app_name">BlockChain with Kotlin</string>
+    <string name="title_toolbar">BlockChain</string>
+    <string name="subtitle_toolbar">with Kotlin</string>
 
-    <string name="log_block_chain_valid">Blockchain valid? %1$b</string>
+    <string name="log_blockchain_valid">Blockchain valid? %1$b</string>
 
     <string name="action_set_pow">Set Proof-of-Work</string>
     <string name="action_encrypt_data">Encrypt message</string>
@@ -17,7 +19,7 @@
     <string name="title_pow">Proof-of-Work</string>
     <string name="title_more">More info</string>
 
-    <string name="text_creating_block_chain">Please wait. Creating Blockchain…</string>
+    <string name="text_creating_blockchain">Please wait. Creating Blockchain…</string>
     <string name="text_mining_blocks">Please wait. Mining blocks to insert data…</string>
     <string name="text_write_your_message">Write your message</string>
     <string name="text_encryption_activated">Encryption activated</string>
@@ -32,7 +34,7 @@
     <string name="text_app_version">v.1.0.0 - Build 01</string>
     <string name="text_more_info">This app is an example to learn how Blockchain works as an Android app using Kotlin.
         To know more about Blockchain you can visit:</string>
-    <string name="text_check_block_chain">Blockchain tutorial</string>
+    <string name="text_check_blockchain">Blockchain tutorial</string>
     <string name="text_check_white_paper">Bitcoin White Paper</string>
     <string name="text_or_read">Or read:</string>
     <string name="text_check_book_1">Blockchain Revolution</string>
@@ -45,11 +47,12 @@
     <string name="text_love">&lt;3</string>
     <string name="text_thank_you">Thanks a lot!</string>
 
-    <string name="error_block_chain_corrupted">Blockchain corrupted. Invalid block inserted</string>
+    <string name="error_blockchain_corrupted">Blockchain corrupted. Invalid block inserted</string>
     <string name="error_something_wrong">Something is wrong</string>
     <string name="error_empty_data">You are trying to send empty data</string>
 
     <string name="cd_send_data">Send data</string>
+    <string name="cd_attach_file">Attach file</string>
     <string name="cd_arrow_back">Dismiss</string>
     <string name="cd_logo">BlockChain Example logo</string>
 

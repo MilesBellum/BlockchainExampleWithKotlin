@@ -16,7 +16,8 @@ import com.eagb.blockchainexamplewithkotlin.databinding.FragmentMoreInfoBinding
 
 class MoreInfoFragment : DialogFragment() {
 
-    private lateinit var viewBinding: FragmentMoreInfoBinding
+    private var _binding: FragmentMoreInfoBinding? = null
+    private val binding get() = _binding!!
 
     companion object {
         fun newInstance(): MoreInfoFragment {
@@ -25,52 +26,46 @@ class MoreInfoFragment : DialogFragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
+    ): View {
         // Inflate the layout for this fragment
-        viewBinding = FragmentMoreInfoBinding.inflate(
-            layoutInflater,
-            container,
-            false
-        )
-
-        return viewBinding.root
+        _binding = FragmentMoreInfoBinding.inflate(layoutInflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val appVersion =
-            "v.".plus(BuildConfig.VERSION_NAME.plus(" - Build ".plus(BuildConfig.VERSION_CODE)))
-        viewBinding.txtAppVersion.text = appVersion
+        val versionName = BuildConfig.VERSION_NAME
+        val versionCode = BuildConfig.VERSION_CODE
+        val appVersion = "v.$versionName - Build $versionCode"
+        binding.txtAppVersion.text = appVersion
 
-        viewBinding.btnClose.setOnClickListener(clickListener)
-        viewBinding.llCheckBlockchain.setOnClickListener(clickListener)
-        viewBinding.llCheckWhitePaper.setOnClickListener(clickListener)
-        viewBinding.llCheckBook1.setOnClickListener(clickListener)
-        viewBinding.llCheckBook2.setOnClickListener(clickListener)
-        viewBinding.llCheckRepo.setOnClickListener(clickListener)
-        viewBinding.llCheckWeb.setOnClickListener(clickListener)
-        viewBinding.txtHeart.setOnClickListener(clickListener)
+        binding.btnClose.setOnClickListener(clickListener)
+        binding.llCheckBlockchain.setOnClickListener(clickListener)
+        binding.llCheckWhitePaper.setOnClickListener(clickListener)
+        binding.llCheckBook1.setOnClickListener(clickListener)
+        binding.llCheckBook2.setOnClickListener(clickListener)
+        binding.llCheckRepo.setOnClickListener(clickListener)
+        binding.llCheckWeb.setOnClickListener(clickListener)
+        binding.txtHeart.setOnClickListener(clickListener)
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog = super.onCreateDialog(savedInstanceState)
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.apply {
+            requestWindowFeature(Window.FEATURE_NO_TITLE)
+            window?.let {
+                it.setLayout(
+                    ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT
+                )
+                it.setBackgroundDrawableResource(android.R.color.transparent)
+            }
+        }
 
         return dialog
-    }
-
-    override fun onStart() {
-        super.onStart()
-
-        val dialog = dialog
-        dialog?.let {
-            it.window?.setLayout(
-                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT
-            )
-        }
     }
 
     private val clickListener = View.OnClickListener { view ->

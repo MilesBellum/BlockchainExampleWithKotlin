@@ -1,9 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#6779F5</color>
-    <color name="colorPrimaryDark">#5241B7</color>
-    <color name="colorAccent">#6779F5</color>
-    <color name="textHintColor">#C1C1C1</color>
-    <color name="textColor">#FFFFFF</color>
-    <color name="textCautionColor">#DD4E4E</color>
+    <color name="color_primary">#6779F5</color>
+    <color name="color_on_primary">@color/white</color>
+    <color name="color_primary_container">#24232B</color>
+    <color name="color_on_primary_container">@color/white</color>
+
+    <color name="color_secondary">#5241B7</color>
+    <color name="color_on_secondary">@color/white</color>
+
+    <color name="color_background">@color/gray</color>
+    <color name="color_on_background">@color/white</color>
+
+    <color name="color_surface">#181920</color>
+    <color name="color_on_surface">#EDE0DC</color>
+
+    <color name="color_accent">#6779F5</color>
+    <color name="text_hint_color">#A8A8A8</color>
+    <color name="text_color">#FFFFFF</color>
+    <color name="text_caution_color">#DD4E4E</color>
 </resources>
