@@ -57,16 +57,16 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
         if (isPowerSaveMode) {
             AppCompatDelegate.setDefaultNightMode(
-                AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
+                AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM,
             )
         } else {
             if (isDarkThemeActivated) {
                 AppCompatDelegate.setDefaultNightMode(
-                    AppCompatDelegate.MODE_NIGHT_YES
+                    AppCompatDelegate.MODE_NIGHT_YES,
                 )
             } else {
                 AppCompatDelegate.setDefaultNightMode(
-                    AppCompatDelegate.MODE_NIGHT_NO
+                    AppCompatDelegate.MODE_NIGHT_NO,
                 )
             }
         }
@@ -101,19 +101,21 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
                 LinearLayoutManager(context, RecyclerView.VERTICAL, false)
 
             // Starting BlockChain request on a thread
-            Thread(Runnable {
-                runOnUiThread {
-                    // Initializing BlockChain...
-                    // PROOF_OF_WORK = difficulty.
-                    // Given some difficulty, the CPU will has to find a hash for the block
-                    // starting with a given number of zeros.
-                    // More Proof-of-Work will be harder to mine and will take longer time.
-                    // Watch out!
-                    blockChain = BlockChainManager(context, prefs.getPowValue())
-                    adapter = blockChain?.adapter
-                    cancelProgressDialog(progressDialog)
-                }
-            }).start()
+            Thread(
+                Runnable {
+                    runOnUiThread {
+                        // Initializing BlockChain...
+                        // PROOF_OF_WORK = difficulty.
+                        // Given some difficulty, the CPU will has to find a hash for the block
+                        // starting with a given number of zeros.
+                        // More Proof-of-Work will be harder to mine and will take longer time.
+                        // Watch out!
+                        blockChain = BlockChainManager(context, prefs.getPowValue())
+                        adapter = blockChain?.adapter
+                        cancelProgressDialog(progressDialog)
+                    }
+                },
+            ).start()
         }
 
         bindingInput.btnSendData.setOnClickListener {
@@ -134,8 +136,8 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
         // Checks that the platform will allow the specified type of update
         appUpdateInfoTask.addOnSuccessListener { appUpdateInfo ->
-            if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
-                && appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)
+            if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE &&
+                appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)
             ) {
                 // Request the update
                 startTheUpdate(appUpdateManager, appUpdateInfo)
@@ -152,7 +154,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
      */
     private fun startTheUpdate(
         appUpdateManager: AppUpdateManager,
-        appUpdateInfo: AppUpdateInfo
+        appUpdateInfo: AppUpdateInfo,
     ) {
         try {
             appUpdateManager.startUpdateFlowForResult(
@@ -163,7 +165,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
                 // The current activity making the update request
                 this,
                 // Include a request code to later monitor this update request
-                UPDATE_REQUEST_CODE
+                UPDATE_REQUEST_CODE,
             )
         } catch (e: SendIntentException) {
             e.printStackTrace()
@@ -206,7 +208,6 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
                     val message = bindingInput.editMessage.text.toString()
 
                     if (message.isNotEmpty()) {
-
                         // Verification if encryption is activated
                         if (!isEncryptionActivated) {
                             // Broadcast data
@@ -217,9 +218,9 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
                                 it.addBlock(
                                     it.newBlock(
                                         CipherUtils.encryptIt(
-                                            message
-                                        )?.trim()
-                                    )
+                                            message,
+                                        )?.trim(),
+                                    ),
                                 )
                             } catch (e: Exception) {
                                 e.printStackTrace()
@@ -231,8 +232,8 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
                         println(
                             resources.getString(
                                 R.string.log_blockchain_valid,
-                                it.isBlockChainValid()
-                            )
+                                it.isBlockChainValid(),
+                            ),
                         )
                         if (it.isBlockChainValid()) {
                             // Preparing data to insert to RecyclerView
@@ -259,7 +260,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         Toast.makeText(
             this,
             R.string.error_blockchain_corrupted,
-            Toast.LENGTH_LONG
+            Toast.LENGTH_LONG,
         ).show()
     }
 
@@ -267,7 +268,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         Toast.makeText(
             this,
             R.string.error_empty_data,
-            Toast.LENGTH_LONG
+            Toast.LENGTH_LONG,
         ).show()
     }
 
@@ -275,7 +276,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         Toast.makeText(
             this,
             R.string.error_something_wrong,
-            Toast.LENGTH_LONG
+            Toast.LENGTH_LONG,
         ).show()
     }
 

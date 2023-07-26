@@ -19,7 +19,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/btn_close"
-                app:srcCompat="@drawable/ic_close_24dp"
+                app:srcCompat="@drawable/ic_round_close_24"
                 android:layout_gravity="top|start"
                 android:contentDescription="@string/cd_arrow_back"
                 android:layout_margin="@dimen/content_margin"

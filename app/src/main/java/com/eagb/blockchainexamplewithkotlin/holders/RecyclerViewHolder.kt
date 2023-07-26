@@ -14,7 +14,7 @@ import java.util.*
  * * @param itemView: Binding item view as a [ItemBlockDataBinding].
  */
 class RecyclerViewHolder(
-    itemView: ItemBlockDataBinding
+    itemView: ItemBlockDataBinding,
 ) : RecyclerView.ViewHolder(itemView.root) {
     private var txtIndex: TextView = itemView.txtIndex
     private var txtPreviousHash: TextView = itemView.txtPreviousHash

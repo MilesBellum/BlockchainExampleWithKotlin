@@ -5,7 +5,11 @@ import java.nio.charset.StandardCharsets
 import java.security.InvalidKeyException
 import java.security.NoSuchAlgorithmException
 import java.security.spec.InvalidKeySpecException
-import javax.crypto.*
+import javax.crypto.BadPaddingException
+import javax.crypto.Cipher
+import javax.crypto.IllegalBlockSizeException
+import javax.crypto.NoSuchPaddingException
+import javax.crypto.SecretKeyFactory
 import javax.crypto.spec.DESKeySpec
 
 class CipherUtils {
@@ -30,7 +34,7 @@ class CipherUtils {
                 cipher.init(Cipher.ENCRYPT_MODE, key)
                 return Base64.encodeToString(
                     cipher.doFinal(clearText),
-                    Base64.DEFAULT
+                    Base64.DEFAULT,
                 )
             } catch (e: InvalidKeyException) {
                 e.printStackTrace()

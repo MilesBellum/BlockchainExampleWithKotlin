@@ -32,11 +32,13 @@
                 android:textStyle="normal"
                 tools:ignore="TouchTargetSizeCheck" />
 
+        <!-- TODO: Support file attachments -->
         <ImageButton
                 android:id="@+id/btn_attach_file"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
+                android:visibility="gone"
                 android:layout_marginStart="@dimen/icon_margin"
                 android:background="@android:color/transparent"
                 android:contentDescription="@string/cd_attach_file"

@@ -6,7 +6,7 @@ import com.eagb.blockchainexamplewithkotlin.models.BlockModel
 
 class BlockChainManager(
     context: Context,
-    private val difficulty: Int
+    private val difficulty: Int,
 ) {
     private var blocks: MutableList<BlockModel> = ArrayList()
     var adapter: BlockAdapter
@@ -31,8 +31,10 @@ class BlockChainManager(
         val latestBlock = latestBlock()
 
         return BlockModel(
-            latestBlock.index + 1, System.currentTimeMillis(),
-            latestBlock.getHash(), data
+            latestBlock.index + 1,
+            System.currentTimeMillis(),
+            latestBlock.getHash(),
+            data,
         )
     }
 
@@ -54,14 +56,16 @@ class BlockChainManager(
 
         return if (firstBlock.previousHash != null) {
             false
-        } else firstBlock.getHash() != null &&
+        } else {
+            firstBlock.getHash() != null &&
                 BlockModel.calculateHash(firstBlock).equals(firstBlock.getHash())
+        }
     }
 
     // Validate new block
     private fun isValidNewBlock(
         newBlock: BlockModel?,
-        previousBlock: BlockModel?
+        previousBlock: BlockModel?,
     ): Boolean {
         if (newBlock != null && previousBlock != null) {
             if (previousBlock.index + 1 != newBlock.index) {
@@ -72,8 +76,10 @@ class BlockChainManager(
                 newBlock.previousHash != previousBlock.getHash()
             ) {
                 return false
-            } else newBlock.getHash() != null &&
+            } else {
+                newBlock.getHash() != null &&
                     BlockModel.calculateHash(newBlock).equals(newBlock.getHash())
+            }
         }
 
         return false

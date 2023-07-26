@@ -13,6 +13,7 @@
             android:supportsRtl="true"
             android:theme="@style/Theme.AppCompat.DayNight"
             tools:ignore="AllowBackup,GoogleAppIndexingWarning">
+
         <activity
                 android:name=".activities.MainActivity"
                 android:exported="true"

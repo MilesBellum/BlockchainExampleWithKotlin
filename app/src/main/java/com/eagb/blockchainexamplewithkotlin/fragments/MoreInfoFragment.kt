@@ -59,7 +59,8 @@ class MoreInfoFragment : DialogFragment() {
             requestWindowFeature(Window.FEATURE_NO_TITLE)
             window?.let {
                 it.setLayout(
-                    ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT
+                    ViewGroup.LayoutParams.WRAP_CONTENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT,
                 )
                 it.setBackgroundDrawableResource(android.R.color.transparent)
             }

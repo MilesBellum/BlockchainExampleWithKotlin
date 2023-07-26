@@ -7,7 +7,7 @@ class BlockModel(
     val index: Int,
     val timestamp: Long,
     val previousHash: String?,
-    val data: String?
+    val data: String?,
 ) {
 
     private var nonce: Int

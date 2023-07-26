@@ -48,7 +48,8 @@ class PowFragment : DialogFragment() {
             requestWindowFeature(Window.FEATURE_NO_TITLE)
             window?.let {
                 it.setLayout(
-                    ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT
+                    ViewGroup.LayoutParams.WRAP_CONTENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT,
                 )
                 it.setBackgroundDrawableResource(android.R.color.transparent)
             }
@@ -73,7 +74,7 @@ class PowFragment : DialogFragment() {
             if (activity != null) {
                 val intent = requireContext().packageManager
                     .getLaunchIntentForPackage(requireContext().packageName)
-                startActivity(intent)
+                startActivity(intent!!)
                 requireActivity().finish()
             } else {
                 dismiss()

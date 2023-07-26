@@ -5,7 +5,7 @@
     <shortcut
             android:shortcutId="clear_data"
             android:enabled="true"
-            android:icon="@drawable/ic_delete_24dp"
+            android:icon="@drawable/ic_round_delete_24"
             android:shortcutShortLabel="@string/shortcut_restore_pow_short_label"
             android:shortcutLongLabel="@string/shortcut_restore_pow_long_label"
             android:shortcutDisabledMessage="@string/shortcut_disable">
