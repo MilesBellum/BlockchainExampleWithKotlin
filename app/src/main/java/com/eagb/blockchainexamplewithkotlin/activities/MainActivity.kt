@@ -10,13 +10,16 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.fragment.app.commit
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.eagb.blockchainexamplewithkotlin.R
 import com.eagb.blockchainexamplewithkotlin.databinding.ActivityMainBinding
+import com.eagb.blockchainexamplewithkotlin.databinding.FragmentBlockchainBinding
 import com.eagb.blockchainexamplewithkotlin.databinding.InputContainerBinding
 import com.eagb.blockchainexamplewithkotlin.fragments.MoreInfoFragment
 import com.eagb.blockchainexamplewithkotlin.fragments.PowFragment
+import com.eagb.blockchainexamplewithkotlin.managers.AppManager
 import com.eagb.blockchainexamplewithkotlin.managers.BlockChainManager
 import com.eagb.blockchainexamplewithkotlin.managers.SharedPreferencesManager
 import com.eagb.blockchainexamplewithkotlin.utils.CipherUtils
@@ -29,6 +32,7 @@ import com.google.android.play.core.install.model.UpdateAvailability
 class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     private lateinit var binding: ActivityMainBinding
+    private lateinit var bindingBlockchain: FragmentBlockchainBinding
     private lateinit var bindingInput: InputContainerBinding
     private lateinit var prefs: SharedPreferencesManager
     private lateinit var appUpdateManager: AppUpdateManager
@@ -37,10 +41,10 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     private var blockChain: BlockChainManager? = null
     private var isEncryptionActivated = false
     private var isDarkThemeActivated = false
+    private val cipherUtils = CipherUtils()
 
     companion object {
         const val UPDATE_REQUEST_CODE = 1000
-        const val TAG_POW_DIALOG = "proof_of_work_dialog"
         const val TAG_MORE_INFO_DIALOG = "more_info_dialog"
     }
 
@@ -75,13 +79,14 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         super.onCreate(savedInstanceState)
         val viewBinding = ActivityMainBinding.inflate(layoutInflater)
         binding = ActivityMainBinding.bind(viewBinding.root)
-        binding.toolbar.apply {
+        bindingBlockchain = FragmentBlockchainBinding.bind(binding.blockchainContainer.root)
+        bindingBlockchain.toolbar.apply {
             setTitleTextColor(resources.getColor(android.R.color.white, context.theme))
             setSubtitleTextColor(resources.getColor(android.R.color.white, context.theme))
         }
-        bindingInput = InputContainerBinding.bind(binding.inputContainer.root)
+        bindingInput = InputContainerBinding.bind(bindingBlockchain.inputContainer.root)
         setContentView(viewBinding.root)
-        setSupportActionBar(binding.toolbar)
+        setSupportActionBar(bindingBlockchain.toolbar)
 
         // Check a possible update from Play Store
         checkUpdate()
@@ -91,7 +96,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         // Setting the Progress Dialog
         showProgressDialog(resources.getString(R.string.text_creating_blockchain))
 
-        binding.recyclerContent.apply {
+        bindingBlockchain.recyclerContent.apply {
             // Use this setting to improve performance if you know that changes
             // in content do not change the layout size of the RecyclerView
             setHasFixedSize(true)
@@ -204,7 +209,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
         runOnUiThread {
             blockChain?.let {
-                if (bindingInput.editMessage.text != null && binding.recyclerContent.adapter != null) {
+                if (bindingInput.editMessage.text != null && bindingBlockchain.recyclerContent.adapter != null) {
                     val message = bindingInput.editMessage.text.toString()
 
                     if (message.isNotEmpty()) {
@@ -217,7 +222,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
                                 // Broadcast data
                                 it.addBlock(
                                     it.newBlock(
-                                        CipherUtils.encryptIt(
+                                        cipherUtils.encryptIt(
                                             message,
                                         )?.trim(),
                                     ),
@@ -237,8 +242,8 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
                         )
                         if (it.isBlockChainValid()) {
                             // Preparing data to insert to RecyclerView
-                            binding.recyclerContent.smoothScrollToPosition(it.adapter.itemCount - 1)
-                            binding.recyclerContent.adapter?.notifyDataSetChanged()
+                            bindingBlockchain.recyclerContent.smoothScrollToPosition(it.adapter.itemCount - 1)
+                            bindingBlockchain.recyclerContent.adapter?.notifyDataSetChanged()
                             // Cleaning the EditText
                             bindingInput.editMessage.setText("")
                         } else {
@@ -333,8 +338,10 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     }
 
     private fun onPowOptionTapped() {
-        val powFragment = PowFragment.newInstance()
-        powFragment.show(this.supportFragmentManager, TAG_POW_DIALOG)
+        supportFragmentManager.commit {
+            setReorderingAllowed(true)
+            add(R.id.fragment_container, PowFragment())
+        }
     }
 
     private fun onEncryptionOptionTapped(item: MenuItem) {
@@ -352,10 +359,9 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         isDarkThemeActivated = !item.isChecked
         item.isChecked = isDarkThemeActivated
         prefs.setDarkTheme(isDarkThemeActivated)
-        val intent =
-            this.packageManager.getLaunchIntentForPackage(this.packageName)
-        startActivity(intent)
-        finish()
+
+        val appManager = AppManager(this)
+        appManager.restartApp()
     }
 
     private fun onMoreInfoOptionTapped() {

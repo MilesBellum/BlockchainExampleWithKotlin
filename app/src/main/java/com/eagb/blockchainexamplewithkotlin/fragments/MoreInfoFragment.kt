@@ -122,4 +122,9 @@ class MoreInfoFragment : DialogFragment() {
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
         startActivity(intent)
     }
+
+    override fun onDetach() {
+        super.onDetach()
+        _binding = null
+    }
 }

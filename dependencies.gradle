@@ -17,6 +17,8 @@ ext {
 
             espressoCore: '3.5.1',
 
+            fragment: '1.6.1',
+
             junit: '4.13.2',
 
             kotlin: '1.8.10',
