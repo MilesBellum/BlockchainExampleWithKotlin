@@ -365,7 +365,9 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     }
 
     private fun onMoreInfoOptionTapped() {
-        val moreInfoFragment = MoreInfoFragment.newInstance()
-        moreInfoFragment.show(this.supportFragmentManager, TAG_MORE_INFO_DIALOG)
+        supportFragmentManager.commit {
+            setReorderingAllowed(true)
+            add(R.id.fragment_container, MoreInfoFragment())
+        }
     }
 }

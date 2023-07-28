@@ -22,7 +22,11 @@ class PowFragment : Fragment(R.layout.fragment_pow) {
         savedInstanceState: Bundle?,
     ): View {
         // Inflate the layout for this fragment
-        _binding = FragmentPowBinding.inflate(layoutInflater, container, false)
+        _binding = FragmentPowBinding.inflate(
+            layoutInflater,
+            container,
+            false,
+        )
         return binding.root
     }
 
