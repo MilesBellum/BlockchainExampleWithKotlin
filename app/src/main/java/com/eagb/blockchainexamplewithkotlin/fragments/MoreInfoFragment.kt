@@ -87,7 +87,7 @@ class MoreInfoFragment : Fragment(R.layout.fragment_more_info) {
 
             R.id.ll_check_web -> {
                 // Checking the official web site
-                url = "https://eagb-corp.web.app"
+                url = "https://eagbcorp.com"
                 openUrl(url)
             }
 

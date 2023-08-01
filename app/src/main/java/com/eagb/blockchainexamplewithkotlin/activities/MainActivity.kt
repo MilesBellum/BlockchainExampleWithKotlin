@@ -45,7 +45,6 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     companion object {
         const val UPDATE_REQUEST_CODE = 1000
-        const val TAG_MORE_INFO_DIALOG = "more_info_dialog"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
