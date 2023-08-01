@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name">BlockChain with Kotlin</string>
-    <string name="title_toolbar">BlockChain</string>
+    <string name="app_name">BC with Kotlin</string>
+    <string name="title_toolbar">Blockchain</string>
     <string name="subtitle_toolbar">with Kotlin</string>
 
     <string name="log_blockchain_valid">Blockchain valid? %1$b</string>
@@ -54,7 +54,7 @@
     <string name="cd_send_data">Send data</string>
     <string name="cd_attach_file">Attach file</string>
     <string name="cd_arrow_back">Dismiss</string>
-    <string name="cd_logo">BlockChain Example logo</string>
+    <string name="cd_logo">Blockchain Example logo</string>
 
     <string name="shortcut_restore_pow_short_label">Restore</string>
     <string name="shortcut_restore_pow_long_label">Restore and open</string>

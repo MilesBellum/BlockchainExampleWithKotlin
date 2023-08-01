@@ -2,7 +2,7 @@ package com.eagb.blockchainexamplewithkotlin.managers
 
 import android.content.Context
 
-class SharedPreferencesManager (context: Context) {
+class SharedPreferencesManager(context: Context) {
 
     companion object {
         const val PREFERENCES_DATA: String = "eagb.blockchainexamplewithkotlin"
@@ -12,7 +12,7 @@ class SharedPreferencesManager (context: Context) {
         const val DEFAULT_PROOF_OF_WORK = 2
     }
 
-    private val sharedPreference =  context.getSharedPreferences(PREFERENCES_DATA, Context.MODE_PRIVATE)
+    private val sharedPreference = context.getSharedPreferences(PREFERENCES_DATA, Context.MODE_PRIVATE)
     private var editor = sharedPreference.edit()
 
     fun setPowValue(powValue: Int) {

@@ -1,29 +1,21 @@
 package com.eagb.blockchainexamplewithkotlin.fragments
 
-import android.app.Dialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.Window
 import android.widget.Toast
-import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.Fragment
 import com.eagb.blockchainexamplewithkotlin.BuildConfig
 import com.eagb.blockchainexamplewithkotlin.R
 import com.eagb.blockchainexamplewithkotlin.databinding.FragmentMoreInfoBinding
 
-class MoreInfoFragment : DialogFragment() {
+class MoreInfoFragment : Fragment(R.layout.fragment_more_info) {
 
     private var _binding: FragmentMoreInfoBinding? = null
     private val binding get() = _binding!!
-
-    companion object {
-        fun newInstance(): MoreInfoFragment {
-            return MoreInfoFragment()
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,7 +23,11 @@ class MoreInfoFragment : DialogFragment() {
         savedInstanceState: Bundle?,
     ): View {
         // Inflate the layout for this fragment
-        _binding = FragmentMoreInfoBinding.inflate(layoutInflater, container, false)
+        _binding = FragmentMoreInfoBinding.inflate(
+            layoutInflater,
+            container,
+            false,
+        )
         return binding.root
     }
 
@@ -53,26 +49,11 @@ class MoreInfoFragment : DialogFragment() {
         binding.txtHeart.setOnClickListener(clickListener)
     }
 
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val dialog = super.onCreateDialog(savedInstanceState)
-        dialog.apply {
-            requestWindowFeature(Window.FEATURE_NO_TITLE)
-            window?.let {
-                it.setLayout(
-                    ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT
-                )
-                it.setBackgroundDrawableResource(android.R.color.transparent)
-            }
-        }
-
-        return dialog
-    }
-
     private val clickListener = View.OnClickListener { view ->
         val url: String
 
         when (view?.id) {
-            R.id.btn_close -> dismiss()
+            R.id.btn_close -> requireActivity().supportFragmentManager.beginTransaction().remove(this).commit()
 
             R.id.ll_check_blockchain -> {
                 // Checking a Blockchain tutorial
@@ -106,7 +87,7 @@ class MoreInfoFragment : DialogFragment() {
 
             R.id.ll_check_web -> {
                 // Checking the official web site
-                url = "https://eagb-corp.web.app"
+                url = "https://eagbcorp.com"
                 openUrl(url)
             }
 
@@ -120,5 +101,10 @@ class MoreInfoFragment : DialogFragment() {
     private fun openUrl(url: String) {
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
         startActivity(intent)
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        _binding = null
     }
 }

@@ -2,7 +2,10 @@ package com.eagb.blockchainexamplewithkotlin.activities
 
 import android.app.Activity
 import android.content.Intent
-import android.content.Intent.*
+import android.content.Intent.ACTION_MAIN
+import android.content.Intent.CATEGORY_LAUNCHER
+import android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP
+import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import android.os.Bundle
 import com.eagb.blockchainexamplewithkotlin.managers.SharedPreferencesManager
 

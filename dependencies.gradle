@@ -1,6 +1,6 @@
 ext {
-    versionCode = 5
-    versionName = "1.0.4"
+    versionCode = 6
+    versionName = "1.0.5"
 
     minSdkVersion = 23
     targetSdkVersion = 33
@@ -16,6 +16,8 @@ ext {
             coreKtx: '1.10.1',
 
             espressoCore: '3.5.1',
+
+            fragment: '1.6.1',
 
             junit: '4.13.2',
 

@@ -11,8 +11,8 @@ import com.eagb.blockchainexamplewithkotlin.holders.RecyclerViewHolder
 import com.eagb.blockchainexamplewithkotlin.models.BlockModel
 
 class BlockAdapter(
-    private val  context: Context,
-    private val blocks: List<BlockModel?>?
+    private val context: Context,
+    private val blocks: List<BlockModel?>?,
 ) : RecyclerView.Adapter<RecyclerViewHolder>() {
 
     private var lastPosition = -1
