@@ -1,10 +1,10 @@
 ext {
-    versionCode = 6
-    versionName = "1.0.5"
+    versionCode = 7
+    versionName = "1.0.6"
 
     minSdkVersion = 23
-    targetSdkVersion = 33
-    compileSdkVersion = 33
+    targetSdkVersion = 34
+    compileSdkVersion = 34
     buildToolsVersion = "29.0.2"
     nameSpace = "com.eagb.blockchainexamplewithkotlin"
 
