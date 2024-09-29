@@ -11,7 +11,6 @@ import com.eagb.blockchainexamplewithkotlin.managers.AppManager
 import com.eagb.blockchainexamplewithkotlin.managers.SharedPreferencesManager
 
 class PowFragment : Fragment(R.layout.fragment_pow) {
-
     private var _binding: FragmentPowBinding? = null
     private val binding get() = _binding!!
     private lateinit var prefs: SharedPreferencesManager
@@ -33,12 +32,22 @@ class PowFragment : Fragment(R.layout.fragment_pow) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        prefs = SharedPreferencesManager(requireContext())
-        binding.edtSetPow.setText(prefs.getPowValue().toString())
-        binding.btnClose.setOnClickListener(clickListener)
-        binding.btnContinue.setOnClickListener(clickListener)
+        binding.setUpView()
     }
 
+    /**
+     * Sets up the view.
+     */
+    private fun FragmentPowBinding.setUpView() {
+        prefs = SharedPreferencesManager(requireContext())
+        edtSetPow.setText(prefs.getPowValue().toString())
+        btnClose.setOnClickListener(clickListener)
+        btnContinue.setOnClickListener(clickListener)
+    }
+
+    /**
+     * Click listener for the view.
+     */
     private val clickListener = View.OnClickListener { view ->
         when (view?.id) {
             R.id.btn_close -> requireActivity().supportFragmentManager.beginTransaction().remove(this).commit()
@@ -46,6 +55,9 @@ class PowFragment : Fragment(R.layout.fragment_pow) {
         }
     }
 
+    /**
+     * Sets a new PoW value.
+     */
     private fun setNewPow() {
         binding.edtSetPow.text?.let {
             val pow = binding.edtSetPow.text.toString()

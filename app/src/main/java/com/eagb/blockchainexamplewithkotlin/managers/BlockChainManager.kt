@@ -26,7 +26,12 @@ class BlockChainManager(
         return blocks[blocks.size - 1]
     }
 
-    // Broadcast block
+    /**
+     * Broadcast block. Creating a new block.
+     *
+     * @param data is the data to broadcast.
+     * @return new block.
+     */
     fun newBlock(data: String?): BlockModel {
         val latestBlock = latestBlock()
 
@@ -38,7 +43,11 @@ class BlockChainManager(
         )
     }
 
-    // Requesting Proof-of-Work
+    /**
+     * Requesting Proof-of-Work. Add block to the block chain.
+     *
+     * @param block is the block to add.
+     */
     fun addBlock(block: BlockModel?) {
         block?.let {
             it.mineBlock(difficulty)
@@ -46,7 +55,11 @@ class BlockChainManager(
         }
     }
 
-    // Validating first block
+    /**
+     * Validating first block. Validating first block.
+     *
+     * @return true if the first block is valid. Otherwise false.
+     */
     private fun isFirstBlockValid(): Boolean {
         val firstBlock = blocks[0]
 
@@ -62,7 +75,13 @@ class BlockChainManager(
         }
     }
 
-    // Validate new block
+    /**
+     * Validate new block.
+     *
+     * @param newBlock is the new block to validate.
+     * @param previousBlock is the previous block.
+     * @return true if the new block is valid. Otherwise false.
+     */
     private fun isValidNewBlock(
         newBlock: BlockModel?,
         previousBlock: BlockModel?,
@@ -85,7 +104,11 @@ class BlockChainManager(
         return false
     }
 
-    // Validating current block
+    /**
+     * Validating current block and block chain.
+     *
+     * @return true if the block chain is valid. Otherwise false.
+     */
     fun isBlockChainValid(): Boolean {
         if (!isFirstBlockValid()) {
             return false

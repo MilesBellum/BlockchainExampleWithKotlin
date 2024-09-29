@@ -3,7 +3,6 @@ package com.eagb.blockchainexamplewithkotlin.managers
 import android.content.Context
 
 class SharedPreferencesManager(context: Context) {
-
     companion object {
         const val PREFERENCES_DATA: String = "eagb.blockchainexamplewithkotlin"
         const val ENCRYPTION_STATUS: String = "encryption_status"

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
-
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
@@ -28,8 +27,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:theme="@style/AppTheme.AppBarOverlay"
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
 
         <androidx.appcompat.widget.Toolbar
@@ -41,23 +40,15 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.core.widget.NestedScrollView
-            android:id="@+id/scroll_view"
+    <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_content"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="@dimen/vertical_input_margin"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_height="0dp"
+            android:scrollbars="vertical"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/app_bar">
-
-        <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_content"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingBottom="@dimen/vertical_input_margin"
-                android:scrollbars="vertical" />
-
-    </androidx.core.widget.NestedScrollView>
+            app:layout_constraintTop_toBottomOf="@id/app_bar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/input_container" />
 
     <include
             android:id="@+id/input_container"

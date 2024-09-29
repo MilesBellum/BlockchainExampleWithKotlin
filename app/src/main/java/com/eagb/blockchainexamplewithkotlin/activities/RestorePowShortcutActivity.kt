@@ -10,7 +10,6 @@ import android.os.Bundle
 import com.eagb.blockchainexamplewithkotlin.managers.SharedPreferencesManager
 
 class RestorePowShortcutActivity : Activity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

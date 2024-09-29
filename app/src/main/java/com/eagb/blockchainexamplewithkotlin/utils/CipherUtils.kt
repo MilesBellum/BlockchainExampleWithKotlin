@@ -13,14 +13,18 @@ import javax.crypto.SecretKeyFactory
 import javax.crypto.spec.DESKeySpec
 
 class CipherUtils {
-
     private companion object {
         private const val PASSWORD = "Th15-15-4-P455w0rd"
         private const val ALGORITHM = "DES"
     }
 
-    // This method is used to encrypt the message, but this feature is not necessary in Blockchain,
-    // so I just added this to keep the example more interesting
+    /**
+     * This method is used to encrypt the message, but this feature is not necessary in Blockchain,
+     * so I just added this to keep the example more interesting.
+     *
+     * @param value is the message to encrypt
+     * @return the encrypted message.
+     */
     fun encryptIt(value: String): String? {
         try {
             val keySpec =
@@ -54,7 +58,13 @@ class CipherUtils {
         return value
     }
 
-    // This method is not used in this app, but it's not bad to know how to decrypt the text
+    /**
+     * This method is used to decrypt the message, but this feature is not necessary in Blockchain.
+     * This method is not used in this app, but it's not bad to know how to decrypt the text.
+     *
+     * @param value is the message to decrypt.
+     * @return the decrypted message.
+     */
     fun decryptIt(value: String): String {
         try {
             val keySpec =
