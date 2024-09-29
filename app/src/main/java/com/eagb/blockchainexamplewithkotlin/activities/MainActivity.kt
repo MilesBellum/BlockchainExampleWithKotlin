@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.commit
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.eagb.blockchainexamplewithkotlin.R
@@ -28,9 +29,9 @@ import com.google.android.play.core.appupdate.AppUpdateManager
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
 import com.google.android.play.core.install.model.AppUpdateType
 import com.google.android.play.core.install.model.UpdateAvailability
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity(R.layout.activity_main) {
-
     private lateinit var binding: ActivityMainBinding
     private lateinit var bindingBlockchain: FragmentBlockchainBinding
     private lateinit var bindingInput: InputContainerBinding
@@ -105,21 +106,17 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
                 LinearLayoutManager(context, RecyclerView.VERTICAL, false)
 
             // Starting BlockChain request on a thread
-            Thread(
-                Runnable {
-                    runOnUiThread {
-                        // Initializing BlockChain...
-                        // PROOF_OF_WORK = difficulty.
-                        // Given some difficulty, the CPU will has to find a hash for the block
-                        // starting with a given number of zeros.
-                        // More Proof-of-Work will be harder to mine and will take longer time.
-                        // Watch out!
-                        blockChain = BlockChainManager(context, prefs.getPowValue())
-                        adapter = blockChain?.adapter
-                        cancelProgressDialog(progressDialog)
-                    }
-                },
-            ).start()
+            lifecycleScope.launch {
+                // Initializing BlockChain...
+                // PROOF_OF_WORK = difficulty.
+                // Given some difficulty, the CPU will has to find a hash for the block
+                // starting with a given number of zeros.
+                // More Proof-of-Work will be harder to mine and will take longer time.
+                // Watch out!
+                blockChain = BlockChainManager(context, prefs.getPowValue())
+                adapter = blockChain?.adapter
+                cancelProgressDialog(progressDialog)
+            }
         }
 
         bindingInput.btnSendData.setOnClickListener {
@@ -206,7 +203,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         // Setting the Progress Dialog
         showProgressDialog(resources.getString(R.string.text_mining_blocks))
 
-        runOnUiThread {
+        lifecycleScope.launch {
             blockChain?.let {
                 if (bindingInput.editMessage.text != null && bindingBlockchain.recyclerContent.adapter != null) {
                     val message = bindingInput.editMessage.text.toString()
@@ -242,7 +239,10 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
                         if (it.isBlockChainValid()) {
                             // Preparing data to insert to RecyclerView
                             bindingBlockchain.recyclerContent.smoothScrollToPosition(it.adapter.itemCount - 1)
-                            bindingBlockchain.recyclerContent.adapter?.notifyDataSetChanged()
+                            blockChain?.adapter?.notifyItemInserted(
+                                blockChain?.adapter?.getItemCount()?.minus(1) ?: return@launch
+                            )
+
                             // Cleaning the EditText
                             bindingInput.editMessage.setText("")
                         } else {
@@ -260,6 +260,9 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         }
     }
 
+    /**
+     * Prints an error message when the block chain is corrupted.
+     */
     private fun printErrorBlockchainCorrupted() {
         Toast.makeText(
             this,
@@ -268,6 +271,9 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         ).show()
     }
 
+    /**
+     * Prints an error message when the EditText is empty.
+     */
     private fun printErrorEmptyData() {
         Toast.makeText(
             this,
@@ -276,6 +282,9 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         ).show()
     }
 
+    /**
+     * Prints an error message when something goes wrong.
+     */
     private fun printErrorSomethingWrong() {
         Toast.makeText(
             this,
@@ -290,7 +299,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
      * @param loadingMessage is the message in [String].
      */
     private fun showProgressDialog(loadingMessage: String) {
-        progressDialog = ProgressDialog(this@MainActivity)
+        progressDialog = ProgressDialog(this)
         progressDialog!!.setProgressStyle(ProgressDialog.STYLE_SPINNER)
         progressDialog!!.setMessage(loadingMessage)
         progressDialog!!.setCancelable(false)
@@ -298,6 +307,11 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         progressDialog!!.show()
     }
 
+    /**
+     * Canceling the Progress Dialog.
+     *
+     * @param progressDialog is the Progress Dialog.
+     */
     private fun cancelProgressDialog(progressDialog: ProgressDialog?) {
         progressDialog?.cancel()
     }
@@ -336,6 +350,9 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         return super.onOptionsItemSelected(item)
     }
 
+    /**
+     * Opening the PoW dialog.
+     */
     private fun onPowOptionTapped() {
         supportFragmentManager.commit {
             setReorderingAllowed(true)
@@ -343,6 +360,11 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         }
     }
 
+    /**
+     * Setting the encryption status.
+     *
+     * @param item is the menu item.
+     */
     private fun onEncryptionOptionTapped(item: MenuItem) {
         isEncryptionActivated = !item.isChecked
         item.isChecked = isEncryptionActivated
@@ -354,6 +376,11 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         prefs.setEncryptionStatus(isEncryptionActivated)
     }
 
+    /**
+     * Setting the dark theme status.
+     *
+     * @param item is the menu item.
+     */
     private fun onDarkThemeOptionTapped(item: MenuItem) {
         isDarkThemeActivated = !item.isChecked
         item.isChecked = isDarkThemeActivated
@@ -363,6 +390,9 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         appManager.restartApp()
     }
 
+    /**
+     * Opening the More Info dialog.
+     */
     private fun onMoreInfoOptionTapped() {
         supportFragmentManager.commit {
             setReorderingAllowed(true)

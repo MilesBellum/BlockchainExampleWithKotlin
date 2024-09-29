@@ -14,7 +14,6 @@ class BlockAdapter(
     private val context: Context,
     private val blocks: List<BlockModel?>?,
 ) : RecyclerView.Adapter<RecyclerViewHolder>() {
-
     private var lastPosition = -1
 
     // Create new views (invoked by the layout manager)
@@ -34,6 +33,12 @@ class BlockAdapter(
         setAnimation(viewHolder.itemView, position)
     }
 
+    /**
+     * Here is the key method to apply the animation.
+     *
+     * @param viewToAnimate view to be animated
+     * @param position position of the view
+     */
     private fun setAnimation(viewToAnimate: View, position: Int) {
         // If the bound view wasn't previously displayed on screen, it's animated
         if (position > lastPosition) {

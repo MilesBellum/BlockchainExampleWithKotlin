@@ -13,7 +13,6 @@ import com.eagb.blockchainexamplewithkotlin.R
 import com.eagb.blockchainexamplewithkotlin.databinding.FragmentMoreInfoBinding
 
 class MoreInfoFragment : Fragment(R.layout.fragment_more_info) {
-
     private var _binding: FragmentMoreInfoBinding? = null
     private val binding get() = _binding!!
 
@@ -34,19 +33,26 @@ class MoreInfoFragment : Fragment(R.layout.fragment_more_info) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.setUpView()
+    }
+
+    /**
+     * Sets up the view.
+     */
+    private fun FragmentMoreInfoBinding.setUpView() {
         val versionName = BuildConfig.VERSION_NAME
         val versionCode = BuildConfig.VERSION_CODE
         val appVersion = "v.$versionName - Build $versionCode"
-        binding.txtAppVersion.text = appVersion
+        txtAppVersion.text = appVersion
 
-        binding.btnClose.setOnClickListener(clickListener)
-        binding.llCheckBlockchain.setOnClickListener(clickListener)
-        binding.llCheckWhitePaper.setOnClickListener(clickListener)
-        binding.llCheckBook1.setOnClickListener(clickListener)
-        binding.llCheckBook2.setOnClickListener(clickListener)
-        binding.llCheckRepo.setOnClickListener(clickListener)
-        binding.llCheckWeb.setOnClickListener(clickListener)
-        binding.txtHeart.setOnClickListener(clickListener)
+        btnClose.setOnClickListener(clickListener)
+        llCheckBlockchain.setOnClickListener(clickListener)
+        llCheckWhitePaper.setOnClickListener(clickListener)
+        llCheckBook1.setOnClickListener(clickListener)
+        llCheckBook2.setOnClickListener(clickListener)
+        llCheckRepo.setOnClickListener(clickListener)
+        llCheckWeb.setOnClickListener(clickListener)
+        txtHeart.setOnClickListener(clickListener)
     }
 
     private val clickListener = View.OnClickListener { view ->
