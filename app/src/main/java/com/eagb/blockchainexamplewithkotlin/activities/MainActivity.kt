@@ -49,6 +49,18 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        managePowerTheme()
+
+        // Setting the Night mode - must be done before calling super()
+        super.onCreate(savedInstanceState)
+
+        setUpView()
+    }
+
+    /**
+     * Managing the power theme.
+     */
+    private fun managePowerTheme() {
         prefs = SharedPreferencesManager(this)
         isDarkThemeActivated = prefs.isDarkTheme()
 
@@ -74,9 +86,12 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
                 )
             }
         }
+    }
 
-        // Setting the Night mode - must be done before calling super()
-        super.onCreate(savedInstanceState)
+    /**
+     * Setting the dark mode.
+     */
+    private fun setUpView() {
         val viewBinding = ActivityMainBinding.inflate(layoutInflater)
         binding = ActivityMainBinding.bind(viewBinding.root)
         bindingBlockchain = FragmentBlockchainBinding.bind(binding.blockchainContainer.root)
@@ -93,6 +108,40 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
         isEncryptionActivated = prefs.getEncryptionStatus()
 
+        bindingInput.btnSendData.setOnClickListener {
+            // Start new request on a UI thread
+            requestNewBlockFromBlockChain()
+        }
+
+        // Starting Blockchain
+        startBlockChain()
+    }
+
+    /**
+     * Checks a possible update from Play Store.
+     */
+    private fun checkUpdate() {
+        // Creates instance of the manager
+        appUpdateManager = AppUpdateManagerFactory.create(this)
+
+        // Returns an intent object that you use to check for an update
+        val appUpdateInfoTask = appUpdateManager.appUpdateInfo
+
+        // Checks that the platform will allow the specified type of update
+        appUpdateInfoTask.addOnSuccessListener { appUpdateInfo ->
+            if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE &&
+                appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)
+            ) {
+                // Request the update
+                startTheUpdate(appUpdateManager, appUpdateInfo)
+            }
+        }
+    }
+
+    /**
+     * Starting BlockChain.
+     */
+    private fun startBlockChain() {
         // Setting the Progress Dialog
         showProgressDialog(resources.getString(R.string.text_creating_blockchain))
 
@@ -116,32 +165,6 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
                 blockChain = BlockChainManager(context, prefs.getPowValue())
                 adapter = blockChain?.adapter
                 cancelProgressDialog(progressDialog)
-            }
-        }
-
-        bindingInput.btnSendData.setOnClickListener {
-            // Start new request on a UI thread
-            startBlockChain()
-        }
-    }
-
-    /**
-     * Checks a possible update from Play Store.
-     */
-    private fun checkUpdate() {
-        // Creates instance of the manager
-        appUpdateManager = AppUpdateManagerFactory.create(this)
-
-        // Returns an intent object that you use to check for an update
-        val appUpdateInfoTask = appUpdateManager.appUpdateInfo
-
-        // Checks that the platform will allow the specified type of update
-        appUpdateInfoTask.addOnSuccessListener { appUpdateInfo ->
-            if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE &&
-                appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)
-            ) {
-                // Request the update
-                startTheUpdate(appUpdateManager, appUpdateInfo)
             }
         }
     }
@@ -197,9 +220,9 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     }
 
     /**
-     * Starting new request or block on a thread.
+     * Requesting new block from Blockchain.
      */
-    private fun startBlockChain() {
+    private fun requestNewBlockFromBlockChain() {
         // Setting the Progress Dialog
         showProgressDialog(resources.getString(R.string.text_mining_blocks))
 
@@ -210,44 +233,10 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
                     if (message.isNotEmpty()) {
                         // Verification if encryption is activated
-                        if (!isEncryptionActivated) {
-                            // Broadcast data
-                            it.addBlock(it.newBlock(message))
-                        } else {
-                            try {
-                                // Broadcast data
-                                it.addBlock(
-                                    it.newBlock(
-                                        cipherUtils.encryptIt(
-                                            message,
-                                        )?.trim(),
-                                    ),
-                                )
-                            } catch (e: Exception) {
-                                e.printStackTrace()
-                                printErrorSomethingWrong()
-                            }
-                        }
+                        verifyEncryption(message, it)
 
                         // Validate block's data
-                        println(
-                            resources.getString(
-                                R.string.log_blockchain_valid,
-                                it.isBlockChainValid(),
-                            ),
-                        )
-                        if (it.isBlockChainValid()) {
-                            // Preparing data to insert to RecyclerView
-                            bindingBlockchain.recyclerContent.smoothScrollToPosition(it.adapter.itemCount - 1)
-                            blockChain?.adapter?.notifyItemInserted(
-                                blockChain?.adapter?.getItemCount()?.minus(1) ?: return@launch
-                            )
-
-                            // Cleaning the EditText
-                            bindingInput.editMessage.setText("")
-                        } else {
-                            printErrorBlockchainCorrupted()
-                        }
+                        validateBlockData(it)
                     } else {
                         printErrorEmptyData()
                     }
@@ -257,6 +246,56 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
                     printErrorSomethingWrong()
                 }
             }
+        }
+    }
+
+    /**
+     * Verify if the encryption is activated.
+     *
+     * @param message is the message to broadcast.
+     * @param blockChainManager is the Blockchain Manager.
+     */
+    private fun verifyEncryption(message: String, blockChainManager: BlockChainManager) {
+        // Verification if encryption is activated
+        if (!isEncryptionActivated) {
+            // Broadcast data
+            blockChainManager.addBlock(blockChainManager.newBlock(message))
+        } else {
+            try {
+                // Broadcast data
+                blockChainManager.addBlock(
+                    blockChainManager.newBlock(
+                        cipherUtils.encryptIt(
+                            message,
+                        )?.trim(),
+                    ),
+                )
+            } catch (e: Exception) {
+                e.printStackTrace()
+                printErrorSomethingWrong()
+            }
+        }
+    }
+
+    private suspend fun validateBlockData(blockChainManager: BlockChainManager) {
+        // Validate block's data
+        println(
+            resources.getString(
+                R.string.log_blockchain_valid,
+                blockChainManager.isBlockChainValid(),
+            ),
+        )
+        if (blockChainManager.isBlockChainValid()) {
+            // Preparing data to insert to RecyclerView
+            bindingBlockchain.recyclerContent.smoothScrollToPosition(blockChainManager.adapter.itemCount - 1)
+            blockChain?.adapter?.notifyItemInserted(
+                blockChain?.adapter?.getItemCount()?.minus(1) ?: return
+            )
+
+            // Cleaning the EditText
+            bindingInput.editMessage.setText("")
+        } else {
+            printErrorBlockchainCorrupted()
         }
     }
 
