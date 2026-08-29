@@ -1,5 +1,6 @@
 # Built application files
 *.apk
+*.aar
 *.ap_
 *.aab
 
@@ -16,11 +17,13 @@ out/
 release/
 
 # Gradle files
-.gradle
 .gradle/
+build/
+app/build/
+*/build/
 
-# Signing files
-.signing/
+# Ignore Gradle GUI config
+gradle-app.setting
 
 # Local configuration file (sdk path, etc)
 local.properties
@@ -31,105 +34,49 @@ proguard/
 # Log Files
 *.log
 
-# Android Studio
-/*/build/
-/*/local.properties
-/*/out
-/*/*/build
-/*/*/production
+# Android Studio Navigation editor temp files
 .navigation/
-*.ipr
-*~
-*.swp
-
-# Android Patch
-gen-external-apklibs
-
-# External native build folder generated in Android Studio 2.2 and later
-.externalNativeBuild
-
-# NDK
-obj/
 
 # Android Studio captures folder
 captures/
 
-# IntelliJ - User-specific configurations
+# IntelliJ
 *.iml
-*.iws
-.idea/sonarlint/
-.idea/caches/
-.idea/libraries/
-.idea/shelf/
+.idea/
 .idea/workspace.xml
 .idea/tasks.xml
 .idea/gradle.xml
-.idea/.name
-.idea/compiler.xml
-.idea/dictionaries
-.idea/copyright/profiles_settings.xml
-.idea/encodings.xml
-.idea/misc.xml
-.idea/modules.xml
-.idea/scopes/scope_settings.xml
-.idea/dictionaries
-.idea/vcs.xml
-.idea/jsLibraryMappings.xml
-.idea/datasources.xml
-.idea/dataSources.ids
-.idea/sqlDataSources.xml
-.idea/dynamic.xml
-.idea/uiDesigner.xml
 .idea/assetWizardSettings.xml
+.idea/dictionaries
+.idea/libraries
 
-# OS-specific files
-.DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-Thumbs.db
-
-# Legacy Eclipse project files
-.classpath
-.project
-.cproject
-.settings/
-
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
-
-# Package Files #
-*.war
-*.ear
-
-# Keystore files
-# Uncomment the following line if you do not want to check your keystore files in.
+# Keystore files (WARNING: Only ignore if you keep keystores elsewhere!)
 *.jks
 *.keystore
-*.keystore.bak
 
 # Google Services (e.g. APIs or Firebase)
 google-services.json
+GoogleService-Info.plist
 
-# Freeline
-freeline.py
-freeline/
-freeline_project_description.json
+# NDK
+obj/
+.cxx/
+.externalNativeBuild/
 
-# fastlane
+# Mac OS
+.DS_Store
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Kotlin
+*.kt.ignore
+
+# Fastlane
 fastlane/report.xml
 fastlane/Preview.html
 fastlane/screenshots
 fastlane/test_output
-fastlane/readme.md
-
-# Version control
-vcs.xml
-
-# Lint
-lint/intermediates/
-lint/generated/
-lint/outputs/
-lint/tmp/
